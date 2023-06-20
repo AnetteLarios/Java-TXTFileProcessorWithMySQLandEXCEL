@@ -22,8 +22,8 @@ public class DataBaseConnection {
     private String user = "root";
     private String pass = "12345678";
     Connection connection = null;
-    String insertStatementSql = "INSERT INTO customers (name, phone_number, address, email, country, number_range, " +
-            "                   rfc, tax VALUES (?,?,?,?,?,?,?,?,?)";
+    String insertStatementSql = "INSERT INTO customers (name, phone_number, address, email, country, number_range," +
+                                 "balance, rfc, tax) VALUES (?,?,?,?,?,?,?,?,?) ";
 
     public DataBaseConnection (List<Client> clientsList){
 
@@ -34,13 +34,28 @@ public class DataBaseConnection {
 
             JOptionPane.showMessageDialog(null, "Connected successfully to database");
 
-            //PreparedStatement insertClientData = connection.prepareStatement(insertStatementSql);
+            PreparedStatement insertClientData = connection.prepareStatement(insertStatementSql);
 
+            for (Client clients : clientsList){
+                insertClientData.setString(1, clients.getName());
+                insertClientData.setString(2, clients.getPhoneNumber());
+                insertClientData.setString(3, clients.getAddress());
+                insertClientData.setString(4, clients.getEmail());
+                insertClientData.setString(5, clients.getCountry());
+                insertClientData.setInt(6, clients.getNumberRange());
+                insertClientData.setFloat(7, clients.getBalance());
+                insertClientData.setString(8, clients.getRfc());
+                insertClientData.setFloat(9, clients.getTax());
+                insertClientData.executeUpdate();
+            }
+            JOptionPane.showMessageDialog(null, "Client List inserted in data base successfully.");
+            insertClientData.close();
+            connection.close();
 
             }catch(SQLException s){
             System.out.println(s.toString());
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            }catch(Exception e) {
+            System.out.println(e.toString());
         }
     }
 }
