@@ -18,7 +18,7 @@ import models.Client;
 public class DataBaseConnection {
 
     private final String driver = "com.mysql.cj.jdbc.Driver";
-    private String url = "jdbc:mysql://localhost::3306/bank_data_sqlXML";
+    private String url = "jdbc:mysql://localhost:3306/bank_data_sqlxml";
     private String user = "root";
     private String pass = "12345678";
     Connection connection = null;
@@ -39,6 +39,8 @@ public class DataBaseConnection {
 
             }catch(SQLException s){
             System.out.println(s.toString());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }
