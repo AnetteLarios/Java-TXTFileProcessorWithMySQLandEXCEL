@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import javax.swing.JOptionPane;
-
+import utils.StringsUtils;
 import models.Client;
 import sql.DataBaseConnection;
-
+import utils.MathUtils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +47,13 @@ public class FileProcessorService {
             dataFromFile = line.split(",");
 
             printClientsFromTxtFile(dataFromFile);
+
+            float numberRange = StringsUtils.convertStringToFloat(dataFromFile[5]);
+            float balance = convertStringToFloatAndRemoveSpecialCharacter(dataFromFile[6]);
+            tax = MathUtils.taxCalculator(numberRange, balance);
+
+
+
         }
         linePerLineReader.close();
 
@@ -71,5 +78,10 @@ public class FileProcessorService {
                                           dataFromFile[6],
                                           dataFromFile[7]);
         System.out.println(clientData);
+    }
+    public static float convertStringToFloatAndRemoveSpecialCharacter(String balance){
+        balance = balance.replace("$","");
+        float balanceFloat = Float.parseFloat(balance);
+        return balanceFloat;
     }
 }
