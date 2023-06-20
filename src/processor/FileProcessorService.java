@@ -52,7 +52,15 @@ public class FileProcessorService {
             float balance = convertStringToFloatAndRemoveSpecialCharacter(dataFromFile[6]);
             tax = MathUtils.taxCalculator(numberRange, balance);
 
-
+            clientList.add(new Client(dataFromFile[0],
+                                      dataFromFile[1],
+                                      dataFromFile[2],
+                                      dataFromFile[3],
+                                      dataFromFile[4],
+                                      Integer.parseInt(dataFromFile[5]),
+                                      balance,
+                                      dataFromFile[7],
+                                      tax));
 
         }
         linePerLineReader.close();
