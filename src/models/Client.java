@@ -88,7 +88,7 @@ public class Client {
         this.tax = tax;
     }
     //class constructor
-    public Client (String name, String phoneNumber, String address, String email, String country
+    public Client (String name, String phoneNumber, String address, String email, String country,
                    int numberRange, float balance, String rfc, float tax){
         this.name = name;
         this.phoneNumber = phoneNumber;
