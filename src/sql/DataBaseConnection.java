@@ -17,11 +17,27 @@ import models.Client;
 
 public class DataBaseConnection {
 
-    private final String driver = "com.mysql.cj.jdbc.Driver";
-    private String url = "jdbc:mysql://localhost:3306/bank_data_sqlxml";
+    private String driver = "com.mysql.cj.jdbc.Driver";
+    protected String url = "jdbc:mysql://localhost:3306/bank_data_sqlxml";
     private String user = "root";
     private String pass = "12345678";
     Connection connection = null;
+
+    public String getDriver(){
+        return driver;
+    }
+
+    public String getUrl(){
+        return url;
+    }
+    public String getUser(){
+        return user;
+    }
+
+    public String getPass(){
+        return pass;
+    }
+
     String insertStatementSql = "INSERT INTO customers (name, phone_number, address, email, country, number_range," +
                                  "balance, rfc, tax) VALUES (?,?,?,?,?,?,?,?,?) ";
 
