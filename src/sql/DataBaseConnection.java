@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import com.sun.jdi.request.ClassPrepareRequest;
 import models.Client;
 
+import sql.DataBaseConnectionToExcel;
+
 public class DataBaseConnection {
 
     private String driver = "com.mysql.cj.jdbc.Driver";
@@ -67,6 +69,8 @@ public class DataBaseConnection {
             JOptionPane.showMessageDialog(null, "Client List inserted in data base successfully.");
             insertClientData.close();
             connection.close();
+
+            DataBaseConnectionToExcel.insertDataFromDataBaseToExcel();
 
             }catch(SQLException s){
             System.out.println(s.toString());
