@@ -6,7 +6,6 @@ public class ApplicationMain {
            FileProcessorService.fileOpenAndRead("C:\\Users\\SpectrumByte\\Documents\\CódigosPaola\\" +
                                                         "Java-TXTFileProcessorWithMySQLandEXCEL\\src\\Resources\\" +
                                                         "UsersData.txt");
-
        } catch (Exception e){
            System.out.println(e.toString());
        }
