@@ -8,7 +8,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import javax.swing.JOptionPane;
-
+import services.emailSenderGmail;
 import javax.xml.transform.Result;
 
 public class DataBaseConnectionToExcel {
@@ -25,7 +25,7 @@ public class DataBaseConnectionToExcel {
         try  {
             connectionToDatabase = DriverManager.getConnection(url, user, pass);
             JOptionPane.showMessageDialog(null, "Successfully connected to Database"
-                                                            + "and initializing the 'Creating Excel Document Process'");
+                                                            + " and initializing the 'Creating Excel Document Process'");
 
             Statement extractInformationFromDataBase = connectionToDatabase.createStatement();
             ResultSet executeQuery = extractInformationFromDataBase.executeQuery(selectInformationFromCustomersStatement);
@@ -92,5 +92,6 @@ public class DataBaseConnectionToExcel {
         workbook.write(customersFile);
         workbook.close();
         customersFile.close();
+        emailSenderGmail.emailExecutor();
     }
 }
