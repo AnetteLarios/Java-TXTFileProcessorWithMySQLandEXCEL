@@ -36,10 +36,12 @@ public class DataBaseConnectionToExcel {
 
         } catch(SQLException | IOException s){
             System.out.println(s.toString());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public static void createExcelWorkbook(ResultSet executeQuery) throws SQLException, IOException {
+    public static void createExcelWorkbook(ResultSet executeQuery) throws Exception {
         //This will create an empty workbook on excel
         XSSFWorkbook workbook = new XSSFWorkbook();
         //Creating a new sheet on the excel file called "customers"
@@ -92,6 +94,7 @@ public class DataBaseConnectionToExcel {
         workbook.write(customersFile);
         workbook.close();
         customersFile.close();
-        emailSenderGmail.emailExecutor();
+
+        emailSenderGmail.callHttpTransport();
     }
 }

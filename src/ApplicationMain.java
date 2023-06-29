@@ -1,10 +1,11 @@
+
 import java.io.IOException;
 import processor.FileProcessorService;
 /*
 This is the main executor of all the program.
 This programs extract information from a txt file, process it and then sends it into a Database.
 Once the information is within the database, the information is process it again to put it into an Excel file.
-If the creation of the excel file is successful, then an email process is made.
+If the creation of the Excel file is successful, then an email process is made.
 
 @author Anette Larios
 @since 21.06.2023
@@ -20,7 +21,8 @@ public class ApplicationMain {
      */
     public static void main(String[] args) {
        try {
-           FileProcessorService.fileOpenAndRead("C:\\Users\\SpectrumByte\\Documents\\CódigosPaola\\" +
+           FileProcessorService.
+                   fileOpenAndRead("C:\\Users\\SpectrumByte\\Documents\\CódigosPaola\\" +
                                                         "Java-TXTFileProcessorWithMySQLandEXCEL\\src\\Resources\\" +
                                                         "UsersData.txt");
        } catch (Exception e){
