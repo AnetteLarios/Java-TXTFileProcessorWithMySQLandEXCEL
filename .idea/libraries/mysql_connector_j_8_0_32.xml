@@ -2,8 +2,35 @@
   <library name="mysql-connector-j-8.0.32">
     <CLASSES>
       <root url="jar://$USER_HOME$/Downloads/mysql-connector-j-8.0.32.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/google-api-client-1.32.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/google-oauth-client-jetty-1.32.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/google-oauth-client-jetty-1.32.1-tests.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/google-api-client-1.32.1-tests.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/google-api-client-java6-1.32.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/google-http-client-jackson2-1.32.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/google-oauth-client-1.32.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/google-http-client-1.32.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/google-api-services-gmail-v1-rev20220404-1.32.1-sources.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/google-api-services-gmail-v1-rev102-1.25.0.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jackson-core-2.10.2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/guava-27.1-jre.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/opencensus-contrib-http-jetty-client-0.24.0.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/opencensus-exporter-trace-stackdriver-0.24.0.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/opencensus-contrib-http-util-0.24.0.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/opencensus-api-0.24.0.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/grpc-context-1.26.0.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/javax.activation-1.2.0.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/Downloads/google-api-client-1.32.1-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/google-oauth-client-jetty-1.32.1-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/google-api-services-gmail-v1-rev20220404-1.32.1-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/google-api-services-gmail-v1-rev20220404-1.32.1-sources.jar!/target/apidocs" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Downloads/google-api-client-1.32.1-sources.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/google-oauth-client-jetty-1.32.1-sources.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/google-api-services-gmail-v1-rev20220404-1.32.1-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
