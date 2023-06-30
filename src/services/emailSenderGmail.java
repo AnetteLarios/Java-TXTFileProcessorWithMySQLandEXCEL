@@ -95,6 +95,12 @@ public class emailSenderGmail {
         email.setFrom(new InternetAddress("codingRepositories@gmail.com"));
         email.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(receiver));
         email.setSubject(subject);
+
+        String htmlTemplate = readEmailTemplate("C:\\Users\\SpectrumByte\\Documents\\CódigosPaola" +
+                                                                    "\\Java-TXTFileProcessorWithMySQLandEXCEL\\src" +
+                                                                    "\\services\\EmailTemplate.html");
+        MimeBodyPart htmlBodyPart = new MimeBodyPart();
+        htmlBodyPart.setContent(htmlTemplate, "text/html");
         //Creating a specific bodyPart
         MimeBodyPart messageBodyPart = new MimeBodyPart();
         messageBodyPart.setText(bodyText);
@@ -111,6 +117,7 @@ public class emailSenderGmail {
             MimeMultipart multipartMessage = new MimeMultipart();
             multipartMessage.addBodyPart(messageBodyPart);
             multipartMessage.addBodyPart(attachmentBodyPart);
+            multipartMessage.addBodyPart(htmlBodyPart);
 
             //Setting the content of the email to the email object
             email.setContent(multipartMessage);
@@ -135,7 +142,16 @@ public class emailSenderGmail {
 
     }
 
-    private static String readEmailTemplate(){
+    private static String readEmailTemplate(String emailTemplateFilePath)throws IOException{
+        StringBuilder contentBuilder = new StringBuilder();
+
+        try(BufferedReader br = new BufferedReader(new FileReader(emailTemplateFilePath))){
+            String line;
+            while((line = br.readLine()) != null){
+                contentBuilder.append(line);
+            }
+        }
+        return contentBuilder.toString();
         
     }
 }
