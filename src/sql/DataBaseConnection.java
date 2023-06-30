@@ -17,6 +17,7 @@ import models.Client;
 
 import sql.DataBaseConnectionToExcel;
 
+import services.emailSenderGmail;
 public class DataBaseConnection {
 
     private String driver = "com.mysql.cj.jdbc.Driver";
@@ -45,6 +46,8 @@ public class DataBaseConnection {
 
     public DataBaseConnection (List<Client> clientsList){
 
+
+
         try{
             Class.forName(driver);
 
@@ -71,6 +74,9 @@ public class DataBaseConnection {
             connection.close();
 
             DataBaseConnectionToExcel.insertDataFromDataBaseToExcel();
+
+
+
 
             }catch(SQLException s){
             System.out.println(s.toString());

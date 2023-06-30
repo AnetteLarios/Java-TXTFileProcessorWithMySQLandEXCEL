@@ -17,7 +17,6 @@ import com.google.api.services.gmail.model.Message;
 import javax.mail.util.ByteArrayDataSource;
 import com.google.api.services.gmail.model.*;
 import com.google.api.services.gmail.model.ModifyMessageRequest;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +29,9 @@ import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
+import processor.FileProcessorService;
+import sql.DataBaseConnection;
+import models.Client;
 public class emailSenderGmail {
 
     private static final String APPLICATION_NAME = "Gmail API Java OAuth2";
@@ -42,8 +44,7 @@ public class emailSenderGmail {
 
         //Uploading credentials from Json's file
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY,
-                new FileReader("C:\\Users\\SpectrumByte\\Downloads\\" +
-                        "client_secret_1065365837178-cjmv3r738luang50m99mptpffvge2luc.apps.googleusercontent.com.json"));
+                new FileReader("Filepath"));
 
         //Setting up authorization flow
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
@@ -79,58 +80,53 @@ public class emailSenderGmail {
                 .build();
 
         //Data to send emailT
-        String receiver = "codingRepositories@gmail.com";
+        String receiver = "ReceiverEmail";
         String subject = "Customers EXCEL File Generated Successfully";
-        String bodyText = "Excel File Generated: ";
         //Strim builder set HTML
-        MimeMessage message = createEmail(receiver, subject, bodyText);
+        MimeMessage message = createEmail(receiver, subject);
         sendMessage(gmail, "me", message);
 
         JOptionPane.showMessageDialog(null, "Email sent successfully");
     }
-    private static MimeMessage createEmail(String receiver, String subject, String bodyText) throws MessagingException, FileNotFoundException , IOException {
+
+    private static MimeMessage createEmail(String receiver, String subject) throws MessagingException, FileNotFoundException, IOException {
         Properties properties = new Properties();
-        Session session = Session.getDefaultInstance(properties,null);
+        Session session = Session.getDefaultInstance(properties, null);
         MimeMessage email = new MimeMessage(session);
-        email.setFrom(new InternetAddress("codingRepositories@gmail.com"));
+        email.setFrom(new InternetAddress("WriterEmail"));
         email.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(receiver));
         email.setSubject(subject);
 
-        String htmlTemplate = readEmailTemplate("C:\\Users\\SpectrumByte\\Documents\\CódigosPaola" +
-                                                                    "\\Java-TXTFileProcessorWithMySQLandEXCEL\\src" +
-                                                                    "\\services\\EmailTemplate.html");
+        String htmlTemplate = readEmailTemplate("htmlFilePath");
         MimeBodyPart htmlBodyPart = new MimeBodyPart();
         htmlBodyPart.setContent(htmlTemplate, "text/html");
         //Creating a specific bodyPart
-        MimeBodyPart messageBodyPart = new MimeBodyPart();
-        messageBodyPart.setText(bodyText);
+
         //Creating a specific part in the email to attach the Excel File
         MimeBodyPart attachmentBodyPart = new MimeBodyPart();
         try {
-            ByteArrayDataSource dataSource = new ByteArrayDataSource(new FileInputStream("C:\\Users\\SpectrumByte\\Documents" +
-                    "\\CódigosPaola\\Java-TXTFileProcessorWithMySQLandEXCEL\\src\\Resources\\" +
-                    "customers.xlsx"), "application/octet-stream");
+            ByteArrayDataSource dataSource = new ByteArrayDataSource(new FileInputStream("XLSX " +
+                    "FILE PATH"), "application/octet-stream");
             attachmentBodyPart.setDataHandler(new DataHandler(dataSource));
             attachmentBodyPart.setFileName("customers.xlsx");
 
             //Combining the parts of the bodymessage
             MimeMultipart multipartMessage = new MimeMultipart();
-            multipartMessage.addBodyPart(messageBodyPart);
-            multipartMessage.addBodyPart(attachmentBodyPart);
             multipartMessage.addBodyPart(htmlBodyPart);
+            multipartMessage.addBodyPart(attachmentBodyPart);
+
 
             //Setting the content of the email to the email object
             email.setContent(multipartMessage);
-        } catch (MessagingException | FileNotFoundException exception){
+        } catch (MessagingException | FileNotFoundException exception) {
             exception.printStackTrace();
-        } catch (IOException exceptionTwo){
+        } catch (IOException exceptionTwo) {
             exceptionTwo.printStackTrace();
         }
         return email;
     }
 
-    private static void sendMessage(Gmail service, String userId, MimeMessage email)throws MessagingException, IOException
-    {
+    private static void sendMessage(Gmail service, String userId, MimeMessage email) throws MessagingException, IOException {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         email.writeTo(buffer);
         byte[] bytes = buffer.toByteArray();
@@ -138,21 +134,42 @@ public class emailSenderGmail {
 
         Message message = new Message();
         message.setRaw(encodedEmail);
-        service.users().messages().send(userId,message).execute();
+        service.users().messages().send(userId, message).execute();
 
     }
 
-    private static String readEmailTemplate(String emailTemplateFilePath)throws IOException{
+    private static String readEmailTemplate(String emailTemplateFilePath) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
 
-        try(BufferedReader br = new BufferedReader(new FileReader(emailTemplateFilePath))){
+        try (BufferedReader br = new BufferedReader(new FileReader(emailTemplateFilePath))) {
             String line;
-            while((line = br.readLine()) != null){
+            while ((line = br.readLine()) != null) {
                 contentBuilder.append(line);
             }
         }
-        return contentBuilder.toString();
-        
+
+        return contentBuilder.toString().replace("{textToReplace}", "Aqui va la tabla");
+
     }
+    public static void extractDataFromClientsList(List<Client>clientList){
+        String firstFiveClients = "";
+        for(int i= 0; i<5; i++){
+          firstFiveClients += String.format(i+1 + " %s, %s, %s, %s, %s, %d, %f, %s, %f, \n",
+                                           clientList.get(i).getName(),
+                                           clientList.get(i).getPhoneNumber(),
+                                           clientList.get(i).getAddress(),
+                                           clientList.get(i).getEmail(),
+                                           clientList.get(i).getCountry(),
+                                           clientList.get(i).getNumberRange(),
+                                           clientList.get(i).getBalance(),
+                                           clientList.get(i).getRfc(),
+                                           clientList.get(i).getTax());
+
+        }
+        firstFiveClients.replace("null","");
+        System.out.println(firstFiveClients);
+
+    }
+
 }
 
