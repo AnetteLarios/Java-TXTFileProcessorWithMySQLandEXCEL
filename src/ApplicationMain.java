@@ -14,7 +14,7 @@ If the creation of the Excel file is successful, then an email process is made.
 public class ApplicationMain {
     /*
     The main function executes a try-catch while the program is trying to localize the file, if the program
-    does not localize it, an exception will be show.
+    does not localize it, an exception will be shown.
 
     @author Anette Larios
     @since 20.06.2023

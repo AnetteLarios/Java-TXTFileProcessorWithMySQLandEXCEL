@@ -11,7 +11,7 @@ import sql.DataBaseConnection;
 import utils.MathUtils;
 import java.util.ArrayList;
 import java.util.List;
-
+import services.emailSenderGmail;
 
 public class FileProcessorService {
 
@@ -64,6 +64,7 @@ public class FileProcessorService {
 
         }
         linePerLineReader.close();
+
 
         return clientList;
     }
