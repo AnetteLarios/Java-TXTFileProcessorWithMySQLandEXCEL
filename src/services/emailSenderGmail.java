@@ -66,7 +66,8 @@ import sql.DataBaseConnection;
 
 import models.Client;
 /*
-emailSenderGmail class
+emailSenderGmail class is in charge to make the connection with a google API to make able for the user to send an
+email when the excel file is created.
 @author Anette Larios
 @since 27.06.2023
 
