@@ -23,7 +23,7 @@ import services.emailSenderGmail;
 DataBaseConnection class contains a constructor in charge to create objects that makes the connection
 with the database.
 @author Anette Larios
-@since 27.06.2023
+@since 20.06.2023
  */
 public class DataBaseConnection {
     /*
