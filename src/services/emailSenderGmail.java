@@ -1,37 +1,76 @@
 package services;
+
 import com.google.api.client.auth.oauth2.Credential;
+
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
+
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
+
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+
 import com.google.api.client.http.HttpTransport;
+
 import com.google.api.client.json.Json;
+
 import com.google.api.client.json.JsonFactory;
+
 import com.google.api.client.json.jackson2.JacksonFactory;
+
 import com.google.api.client.util.Base64;
+
 import com.google.api.client.util.store.FileDataStoreFactory;
+
 import com.google.api.services.gmail.Gmail;
+
 import com.google.api.services.gmail.GmailScopes;
+
 import com.google.api.services.gmail.model.Message;
+
 import javax.mail.util.ByteArrayDataSource;
+
 import com.google.api.services.gmail.model.*;
+
 import com.google.api.services.gmail.model.ModifyMessageRequest;
+
 import java.io.*;
+
 import java.util.ArrayList;
+
 import java.util.List;
+
 import java.util.Properties;
+
 import javax.mail.MessagingException;
+
 import javax.mail.Session;
+
 import javax.activation.*;
+
 import javax.mail.internet.MimeBodyPart;
+
 import javax.mail.internet.MimeMultipart;
+
 import javax.mail.internet.InternetAddress;
+
 import javax.mail.internet.MimeMessage;
+
 import javax.swing.JOptionPane;
+
 import processor.FileProcessorService;
+
 import sql.DataBaseConnection;
+
 import models.Client;
+/*
+emailSenderGmail class
+@author Anette Larios
+@since 27.06.2023
+
+ */
 public class emailSenderGmail {
 
     private static final String APPLICATION_NAME = "Gmail API Java OAuth2";
